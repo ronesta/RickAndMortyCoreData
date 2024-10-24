@@ -22,6 +22,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupViews()
+        getCharacters()
     }
 
     private func setupNavigationBar() {
@@ -45,6 +46,20 @@ class ViewController: UIViewController {
             make.horizontalEdges.equalToSuperview()
         }
     }
+
+    private func getCharacters() {
+        NetworkManager.shared.getCharacters { [weak self] result in
+            switch result {
+            case .success(let character):
+                self?.characters = character
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                print("Failed to fetch drinks: \(error.localizedDescription)")
+            }
+        }
+    }
 }
 
 extension ViewController: UITableViewDataSource {
@@ -57,6 +72,18 @@ extension ViewController: UITableViewDataSource {
             withIdentifier: CharacterTableViewCell.id,
             for: indexPath) as? CharacterTableViewCell else {
             return UITableViewCell()
+        }
+
+        let character = characters[indexPath.row]
+        let image = character.image
+
+        ImageLoader.shared.loadImage(from: image) { loadedImage in
+            DispatchQueue.main.async {
+                guard let cell = tableView.cellForRow(at: indexPath) as? CharacterTableViewCell  else {
+                    return
+                }
+                cell.configure(with: character, image: loadedImage)
+            }
         }
 
         return cell

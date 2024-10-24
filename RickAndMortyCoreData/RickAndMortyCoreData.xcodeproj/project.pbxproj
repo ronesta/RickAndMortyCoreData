@@ -14,6 +14,11 @@
 		E11BA15C2CCA5F5200B21910 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E11BA15A2CCA5F5200B21910 /* LaunchScreen.storyboard */; };
 		E11BA1652CCA61B500B21910 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E11BA1642CCA61B500B21910 /* SnapKit */; };
 		E11BA1672CCA620300B21910 /* CharacterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11BA1662CCA620300B21910 /* CharacterTableViewCell.swift */; };
+		E11BA16B2CCA631E00B21910 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11BA16A2CCA631E00B21910 /* Character.swift */; };
+		E11BA16D2CCA633D00B21910 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11BA16C2CCA633D00B21910 /* NetworkManager.swift */; };
+		E11BA16F2CCA635B00B21910 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11BA16E2CCA635B00B21910 /* NetworkError.swift */; };
+		E11BA1712CCA637A00B21910 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11BA1702CCA637A00B21910 /* ImageLoader.swift */; };
+		E11BA1732CCA639100B21910 /* DataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11BA1722CCA639100B21910 /* DataCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +30,11 @@
 		E11BA15B2CCA5F5200B21910 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E11BA15D2CCA5F5200B21910 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E11BA1662CCA620300B21910 /* CharacterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterTableViewCell.swift; sourceTree = "<group>"; };
+		E11BA16A2CCA631E00B21910 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		E11BA16C2CCA633D00B21910 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		E11BA16E2CCA635B00B21910 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		E11BA1702CCA637A00B21910 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		E11BA1722CCA639100B21910 /* DataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +72,11 @@
 				E11BA1512CCA5F5100B21910 /* SceneDelegate.swift */,
 				E11BA1532CCA5F5100B21910 /* ViewController.swift */,
 				E11BA1662CCA620300B21910 /* CharacterTableViewCell.swift */,
+				E11BA16A2CCA631E00B21910 /* Character.swift */,
+				E11BA16C2CCA633D00B21910 /* NetworkManager.swift */,
+				E11BA16E2CCA635B00B21910 /* NetworkError.swift */,
+				E11BA1702CCA637A00B21910 /* ImageLoader.swift */,
+				E11BA1722CCA639100B21910 /* DataCache.swift */,
 				E11BA1582CCA5F5200B21910 /* Assets.xcassets */,
 				E11BA15A2CCA5F5200B21910 /* LaunchScreen.storyboard */,
 				E11BA15D2CCA5F5200B21910 /* Info.plist */,
@@ -145,9 +160,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E11BA16D2CCA633D00B21910 /* NetworkManager.swift in Sources */,
+				E11BA16F2CCA635B00B21910 /* NetworkError.swift in Sources */,
+				E11BA1732CCA639100B21910 /* DataCache.swift in Sources */,
 				E11BA1542CCA5F5100B21910 /* ViewController.swift in Sources */,
 				E11BA1502CCA5F5100B21910 /* AppDelegate.swift in Sources */,
+				E11BA16B2CCA631E00B21910 /* Character.swift in Sources */,
 				E11BA1522CCA5F5100B21910 /* SceneDelegate.swift in Sources */,
+				E11BA1712CCA637A00B21910 /* ImageLoader.swift in Sources */,
 				E11BA1672CCA620300B21910 /* CharacterTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
