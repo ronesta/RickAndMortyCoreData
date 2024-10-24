@@ -23,6 +23,7 @@ class ViewController: UIViewController {
         setupNavigationBar()
         setupViews()
         getCharacters()
+        CoreDataManager.shared.fetchCharacters()
     }
 
     private func setupNavigationBar() {
