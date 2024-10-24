@@ -12,6 +12,8 @@
 		E11BA1542CCA5F5100B21910 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11BA1532CCA5F5100B21910 /* ViewController.swift */; };
 		E11BA1592CCA5F5200B21910 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E11BA1582CCA5F5200B21910 /* Assets.xcassets */; };
 		E11BA15C2CCA5F5200B21910 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E11BA15A2CCA5F5200B21910 /* LaunchScreen.storyboard */; };
+		E11BA1652CCA61B500B21910 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E11BA1642CCA61B500B21910 /* SnapKit */; };
+		E11BA1672CCA620300B21910 /* CharacterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11BA1662CCA620300B21910 /* CharacterTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,7 @@
 		E11BA1582CCA5F5200B21910 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E11BA15B2CCA5F5200B21910 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E11BA15D2CCA5F5200B21910 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E11BA1662CCA620300B21910 /* CharacterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E11BA1652CCA61B500B21910 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +61,7 @@
 				E11BA14F2CCA5F5100B21910 /* AppDelegate.swift */,
 				E11BA1512CCA5F5100B21910 /* SceneDelegate.swift */,
 				E11BA1532CCA5F5100B21910 /* ViewController.swift */,
+				E11BA1662CCA620300B21910 /* CharacterTableViewCell.swift */,
 				E11BA1582CCA5F5200B21910 /* Assets.xcassets */,
 				E11BA15A2CCA5F5200B21910 /* LaunchScreen.storyboard */,
 				E11BA15D2CCA5F5200B21910 /* Info.plist */,
@@ -80,6 +85,9 @@
 			dependencies = (
 			);
 			name = RickAndMortyCoreData;
+			packageProductDependencies = (
+				E11BA1642CCA61B500B21910 /* SnapKit */,
+			);
 			productName = RickAndMortyCoreData;
 			productReference = E11BA14C2CCA5F5100B21910 /* RickAndMortyCoreData.app */;
 			productType = "com.apple.product-type.application";
@@ -108,6 +116,9 @@
 				Base,
 			);
 			mainGroup = E11BA1432CCA5F5100B21910;
+			packageReferences = (
+				E11BA1632CCA61B500B21910 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = E11BA14D2CCA5F5100B21910 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,6 +148,7 @@
 				E11BA1542CCA5F5100B21910 /* ViewController.swift in Sources */,
 				E11BA1502CCA5F5100B21910 /* AppDelegate.swift in Sources */,
 				E11BA1522CCA5F5100B21910 /* SceneDelegate.swift in Sources */,
+				E11BA1672CCA620300B21910 /* CharacterTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +362,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E11BA1632CCA61B500B21910 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E11BA1642CCA61B500B21910 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E11BA1632CCA61B500B21910 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E11BA1442CCA5F5100B21910 /* Project object */;
 }
