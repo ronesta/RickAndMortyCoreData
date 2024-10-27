@@ -35,8 +35,14 @@ public final class CoreDataManager: NSObject {
             }
         }
     }
-
-    public func createOrUpdateCharacter(id: Int64, gender: String, image: String, location: String, name: String, species: String, status: String) {
+    // swiftlint:disable:next function_parameter_count
+    public func createOrUpdateCharacter(id: Int64,
+                                        gender: String,
+                                        image: String,
+                                        location: String,
+                                        name: String,
+                                        species: String,
+                                        status: String) {
         let fetchRequest = NSFetchRequest<Entity>(entityName: "Entity")
         fetchRequest.predicate = NSPredicate(format: "id == %d", id)
 
@@ -81,7 +87,7 @@ public final class CoreDataManager: NSObject {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Entity")
 
         do {
-            return try context.fetch(fetchRequest) as! [Entity]
+            return try context.fetch(fetchRequest) as? [Entity] ?? []
         } catch {
             print(error.localizedDescription)
         }

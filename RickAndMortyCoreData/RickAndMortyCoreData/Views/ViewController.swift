@@ -40,22 +40,24 @@ class ViewController: UIViewController {
                            forCellReuseIdentifier: CharacterTableViewCell.id)
 
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
-            make.horizontalEdges.equalToSuperview()
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
 
     private func getCharacters() {
         NetworkManager.shared.getCharacters { [weak self] result, error in
+            if let error {
+                print("Error getting characters: \(error)")
+                return
+            }
+
             guard let result else {
                 return
             }
 
-            CoreDataManager.shared.saveCharacters(result)
-            self?.characters = CoreDataManager.shared.fetchCharacters()
-
             DispatchQueue.main.async {
+                CoreDataManager.shared.saveCharacters(result)
+                self?.characters = CoreDataManager.shared.fetchCharacters()
                 self?.tableView.reloadData()
             }
         }
@@ -75,16 +77,19 @@ extension ViewController: UITableViewDataSource {
         }
 
         let character = characters[indexPath.row]
-        guard let image = characters[indexPath.row].image else {
+        guard let imageURL = character.image else {
             return UITableViewCell()
         }
 
-        ImageLoader.shared.loadImage(from: image) { loadedImage in
+        ImageLoader.shared.loadImage(from: imageURL) { [weak self] loadedImage in
             DispatchQueue.main.async {
-                guard let cell = tableView.cellForRow(at: indexPath) as? CharacterTableViewCell  else {
+                guard let cell = tableView.cellForRow(at: indexPath) as? CharacterTableViewCell else {
                     return
                 }
-                cell.configure(with: character, image: loadedImage)
+
+                if self?.characters[indexPath.row].image == imageURL {
+                    cell.configure(with: character, image: loadedImage)
+                }
             }
         }
 
