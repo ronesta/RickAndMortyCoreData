@@ -9,21 +9,19 @@ import UIKit
 import SnapKit
 
 class ViewController: UIViewController {
-
     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.separatorStyle = .none
         return tableView
     }()
 
-    var characters = [Character]()
+    var characters = [Entity]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupViews()
         getCharacters()
-        CoreDataManager.shared.fetchCharacters()
     }
 
     private func setupNavigationBar() {
@@ -49,15 +47,16 @@ class ViewController: UIViewController {
     }
 
     private func getCharacters() {
-        NetworkManager.shared.getCharacters { [weak self] result in
-            switch result {
-            case .success(let character):
-                self?.characters = character
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
-            case .failure(let error):
-                print("Failed to fetch drinks: \(error.localizedDescription)")
+        NetworkManager.shared.getCharacters { [weak self] result, error in
+            guard let result else {
+                return
+            }
+
+            CoreDataManager.shared.saveCharacters(result)
+            self?.characters = CoreDataManager.shared.fetchCharacters()
+
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
             }
         }
     }
@@ -76,7 +75,9 @@ extension ViewController: UITableViewDataSource {
         }
 
         let character = characters[indexPath.row]
-        let image = character.image
+        guard let image = characters[indexPath.row].image else {
+            return UITableViewCell()
+        }
 
         ImageLoader.shared.loadImage(from: image) { loadedImage in
             DispatchQueue.main.async {

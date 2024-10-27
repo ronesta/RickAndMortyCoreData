@@ -166,14 +166,14 @@ final class CharacterTableViewCell: UITableViewCell {
         return UIImage(cgImage: cgImage)
     }
 
-    func configure(with character: Character, image: UIImage?) {
+    func configure(with character: Entity, image: UIImage?) {
         activityIndicator.startAnimating()
         characterImageView.image = image
         nameLabel.text = character.name
-        speciesAndGenderLabel.text = "\(character.species), \(character.gender)"
+        speciesAndGenderLabel.text = "\(character.species ?? ""), \(character.gender ?? "")"
         watchEpisodesButton.setTitle("▶ Watch episodes", for: .normal)
         markerImageView.image = UIImage(named: "marker")
-        locationLabel.text = character.location.name
+        locationLabel.text = character.location
         statusLabel.text = character.status
 
         switch character.status {

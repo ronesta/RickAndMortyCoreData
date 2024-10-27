@@ -13,12 +13,6 @@ class ImageLoader {
     private init() {}
 
     func loadImage(from urlString: String, completion: @escaping (UIImage?) -> Void) {
-        let cacheKey = NSString(string: urlString)
-
-        if let cachedImage = DataCache.shared.object(forKey: cacheKey) {
-            completion(cachedImage)
-            return
-        }
 
         guard let url = URL(string: urlString) else {
             completion(nil)
@@ -34,7 +28,6 @@ class ImageLoader {
 
             if let data,
                let image = UIImage(data: data) {
-                DataCache.shared.setObject(image, forKey: cacheKey)
                 completion(image)
             } else {
                 completion(nil)
