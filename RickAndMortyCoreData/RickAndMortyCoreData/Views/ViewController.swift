@@ -45,6 +45,15 @@ class ViewController: UIViewController {
     }
 
     private func getCharacters() {
+        self.characters = CoreDataManager.shared.fetchCharacters()
+
+        guard self.characters.isEmpty else {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            return
+        }
+
         NetworkManager.shared.getCharacters { [weak self] result, error in
             if let error {
                 print("Error getting characters: \(error)")
@@ -55,8 +64,9 @@ class ViewController: UIViewController {
                 return
             }
 
+            CoreDataManager.shared.saveCharacters(result)
+
             DispatchQueue.main.async {
-                CoreDataManager.shared.saveCharacters(result)
                 self?.characters = CoreDataManager.shared.fetchCharacters()
                 self?.tableView.reloadData()
             }
