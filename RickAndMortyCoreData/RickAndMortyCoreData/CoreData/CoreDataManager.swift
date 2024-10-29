@@ -42,7 +42,8 @@ public final class CoreDataManager: NSObject {
                                         location: String,
                                         name: String,
                                         species: String,
-                                        status: String) {
+                                        status: String,
+                                        imageData: Data?) {
         let fetchRequest = NSFetchRequest<Entity>(entityName: "Entity")
         fetchRequest.predicate = NSPredicate(format: "id == %d", id)
 
@@ -62,6 +63,7 @@ public final class CoreDataManager: NSObject {
             entity.name = name
             entity.species = species
             entity.status = status
+            entity.imageData = imageData
 
             saveContext()
         } catch {
@@ -69,8 +71,8 @@ public final class CoreDataManager: NSObject {
         }
     }
 
-    func saveCharacters(_ characters: [Character]) {
-        for character in characters {
+    func saveCharacters(_ characters: [(character: Character, imageData: Data?)]) {
+        for (character, imageData) in characters {
             createOrUpdateCharacter(
                 id: Int64(character.id),
                 gender: character.gender,
@@ -78,7 +80,8 @@ public final class CoreDataManager: NSObject {
                 location: character.location.name,
                 name: character.name,
                 species: character.species,
-                status: character.status
+                status: character.status,
+                imageData: imageData
             )
         }
     }
@@ -92,6 +95,21 @@ public final class CoreDataManager: NSObject {
             print(error.localizedDescription)
         }
         return []
+    }
+
+    func fetchImageData(forCharacterId id: Int64) -> Data? {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Entity")
+        fetchRequest.predicate = NSPredicate(format: "id == %d", id)
+
+        do {
+            if let characterEntity = try context.fetch(fetchRequest).first as? Entity {
+                return characterEntity.imageData
+            }
+        } catch {
+            print("Error fetching image data for character with id \(id): \(error)")
+        }
+
+        return nil
     }
 
     public func fetchCharacter(id: Int) -> Entity? {

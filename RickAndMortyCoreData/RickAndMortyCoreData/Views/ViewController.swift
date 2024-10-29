@@ -64,7 +64,23 @@ class ViewController: UIViewController {
                 return
             }
 
-            CoreDataManager.shared.saveCharacters(result)
+            var charactersToSave: [(character: Character, imageData: Data)] = []
+
+            result.forEach { res in
+                guard let url = URL(string: res.image) else {
+                    print("Invalid URL for character image")
+                    return
+                }
+
+                do {
+                    let imageData = try Data(contentsOf: url)
+                    charactersToSave.append((character: res, imageData: imageData))
+                } catch {
+                    print("Failed to load image data: \(error)")
+                }
+            }
+
+            CoreDataManager.shared.saveCharacters(charactersToSave)
 
             DispatchQueue.main.async {
                 self?.characters = CoreDataManager.shared.fetchCharacters()
@@ -87,21 +103,13 @@ extension ViewController: UITableViewDataSource {
         }
 
         let character = characters[indexPath.row]
-        guard let imageURL = character.image else {
-            return UITableViewCell()
+
+        guard let imageData = CoreDataManager.shared.fetchImageData(forCharacterId: character.id),
+              let image = UIImage(data: imageData) else {
+            return cell
         }
 
-        ImageLoader.shared.loadImage(from: imageURL) { [weak self] loadedImage in
-            DispatchQueue.main.async {
-                guard let cell = tableView.cellForRow(at: indexPath) as? CharacterTableViewCell else {
-                    return
-                }
-
-                if self?.characters[indexPath.row].image == imageURL {
-                    cell.configure(with: character, image: loadedImage)
-                }
-            }
-        }
+        cell.configure(with: character, image: image)
 
         return cell
     }
